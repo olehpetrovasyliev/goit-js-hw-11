@@ -1,100 +1,158 @@
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+:root {
+  --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-duration: 250ms;
 }
-
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #eeeeee;
+  background-color: #fafafa;
   color: #212121;
   line-height: 1.5;
+  margin: 0;
 }
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.form-section {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  width: 100%;
+  background-color: #a5a5ed;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0px 0px 10px black;
+}
+
 .search-form {
   display: flex;
+  align-items: center;
   justify-content: center;
-  padding: 15px;
-  background-color: #2763b2;
-  box-shadow: 0px 5px 5px #2121213d;
-  position: sticky;
-  top: 0;
+  height: 30px;
+  max-width: 300px;
+  margin: 0 auto;
 }
 
-.input {
-  padding: 5px;
-  border-style: none;
-  border-radius: 2px 0 0 2px;
+.search-input {
+  height: 100%;
+  width: 100%;
+  display: block;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #8888;
+  border-right: none;
+  padding: 0 5px;
 }
-.submitBtn {
-  border-style: none;
-  border-radius: 0 2px 2px 0;
-  min-width: 30px;
+
+.btn-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 0;
+  margin-left: -30px;
+  outline: none;
+}
+
+.btn-search:hover {
   cursor: pointer;
 }
-
+.search-input:focus,
+.btn-search:focus {
+  border: 1px solid #4a4a4a;
+}
+.gallery-section {
+  margin-top: 50px;
+}
 .gallery {
-  padding: 30px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 20px;
 }
 
-.photo-card {
+.gallery__item {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background-color: white;
+  width: calc((100% - 60px) / 4);
+  text-decoration: none;
+  color: #000;
+  min-height: 144px;
+  /* height: 100%; */
   border-radius: 5px;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.1), 0px 1px 1px -1px rgba(0, 0, 0, 0.1);
+  transition: transform var(--animation-duration) var(--timing-function);
+  overflow: hidden;
 }
 
-.thumb {
-  /* position: relative; */
-  height: 200px;
-  width: 100%;
+.gallery__item:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
 
-.img {
-  border-radius: 5px 5px 0 0;
-  display: block;
+.img-container {
+  aspect-ratio: 4/3;
+  /* flex-grow: 1; */
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.gallery__image {
   height: 100%;
   width: 100%;
   object-fit: cover;
-}
-.info {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 15px;
-  padding: 10px;
+  display: block;
 }
 
 .info-item {
-  font-size: small;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 0;
 }
 
-.footer {
+.info {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
   align-items: center;
-  padding-bottom: 30px;
+  padding: 10px 5px;
+  gap: 10px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.btn-container {
+  text-align: center;
 }
 
 .load-more {
-  margin-right: auto;
-  margin-left: auto;
-  text-transform: uppercase;
-  font-weight: 500;
-  font-size: medium;
-  padding: 15px 20px;
-  background-color: #63a736;
-  border-style: none;
-  color: white;
-  cursor: pointer;
+  background-color: #5e5ef7;
+  opacity: 80%;
+  color: #fff;
+  border: none;
   border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.load-more:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.btn-hidden {
+  display: none;
 }
