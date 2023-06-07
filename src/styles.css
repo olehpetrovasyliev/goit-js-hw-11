@@ -38,39 +38,6 @@ img {
   margin: 0 auto;
 }
 
-.search-input {
-  height: 100%;
-  width: 100%;
-  display: block;
-  outline: none;
-  border-radius: 5px;
-  border: 1px solid #8888;
-  border-right: none;
-  padding: 0 5px;
-}
-
-.btn-search {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  padding: 0;
-  margin-left: -30px;
-  outline: none;
-}
-
-.btn-search:hover {
-  cursor: pointer;
-}
-.search-input:focus,
-.btn-search:focus {
-  border: 1px solid #4a4a4a;
-}
 .gallery-section {
   margin-top: 50px;
 }
@@ -139,6 +106,9 @@ img {
 }
 
 .load-more {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
   background-color: #5e5ef7;
   opacity: 80%;
   color: #fff;

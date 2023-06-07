@@ -26,27 +26,44 @@ function handleSubmit(event) {
 
   refs.gallery.innerHTML = '';
 
-  fetchImages(searchQuery);
-  Notiflix.Notify.success(`we found ${images.length}`);
+  pushImages(searchQuery);
+  // console.log(totalPages);
 }
 
-async function fetchImages(query) {
+async function pushImages(query) {
   try {
-    const response = await getGallery(query, currentPage);
-    const images = response.data.hits;
-
+    const resp = await getGallery(query, currentPage);
+    const images = resp.data.hits;
     if (images.length === 0) {
-      Notiflix.Notify.failure(
-        'Sorry, there are no images matching your search query. Please try again.'
+      return Notiflix.Notify.failure(
+        'sorry, we have not found images for your request!'
       );
-      return;
     }
-
-    showImages(images);
-    refs.loadMoreBtn.classList.remove('btn-hidden');
-  } catch (error) {
-    console.log('Error fetching images:', error);
-    showNotification('Oops! Something went wrong. Please try again later.');
+    getMarkup(images);
+    if (totalPages > 1) {
+      console.log(1);
+      refs.loadMoreBtn.classList.remove('btn-hidden');
+    }
+    if (currentPage === 1 && currentPage === totalPages) {
+      Notiflix.Notify.success(
+        `we found ${
+          images.length * totalPages
+        } images for ${query}, here are all of them`
+      );
+    } else if (currentPage === 1) {
+      Notiflix.Notify.success(
+        `we found ${
+          images.length * totalPages
+        } images for ${query}, here are first ${images.length} images`
+      );
+    } else if (currentPage === totalPages) {
+      Notiflix.Notify.success('you have reached the last page');
+      refs.loadMoreBtn.classList.add('btn-hidden');
+    } else {
+      Notiflix.Notify.info('here are more 40 images');
+    }
+  } catch (err) {
+    Notiflix.Notify.failure(err);
   }
 }
 
@@ -68,7 +85,7 @@ async function getGallery(query, page) {
   return response;
 }
 
-function showImages(images) {
+function getMarkup(images) {
   const markup = images
     .map(
       img => `<div class="photo-card">
@@ -96,18 +113,17 @@ function showImages(images) {
     .join('');
 
   refs.gallery.insertAdjacentHTML('beforeend', markup);
-  initLightbox(); // Initialize the lightbox plugin for newly added images
-}
-
-function hideLoadMoreBtn() {
-  refs.loadMoreBtn.classList.add('is-hidden');
+  // initLightbox(); // Initialize the lightbox plugin for newly added images
 }
 
 function loadMoreImages() {
   currentPage += 1;
 
   const searchQuery = refs.input.value.trim();
-  fetchImages(searchQuery);
+  pushImages(searchQuery);
+  if (currentPage === totalPages) {
+    return refs.loadMoreBtn.classList.add('btn-hidden');
+  }
 }
 
 refs.loadMoreBtn.addEventListener('click', loadMoreImages);
