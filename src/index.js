@@ -19,7 +19,8 @@ refs.form.addEventListener('submit', handleSubmit);
 function handleSubmit(event) {
   event.preventDefault();
   const searchQuery = refs.input.value.trim().toLowerCase();
-
+  // localStorage.setItem('iputValue', JSON.stringify(searchQuery));
+  // console.log(localStorage.getItem(inputValue));
   if (searchQuery === '') {
     return;
   }
@@ -41,7 +42,7 @@ async function pushImages(query) {
     }
     getMarkup(images);
     if (totalPages > 1) {
-      console.log(1);
+      // console.log(1);
       refs.loadMoreBtn.classList.remove('btn-hidden');
     }
     if (currentPage === 1 && currentPage === totalPages) {
