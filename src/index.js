@@ -19,8 +19,8 @@ refs.form.addEventListener('submit', handleSubmit);
 function handleSubmit(event) {
   event.preventDefault();
   const searchQuery = refs.input.value.trim().toLowerCase();
-  // localStorage.setItem('iputValue', JSON.stringify(searchQuery));
-  // console.log(localStorage.getItem(inputValue));
+  // localStorage.setItem('iputValue', refs.input.value.trim().toLowerCase());
+  // console.log(localStorage.getItem('inputValue'));
   if (searchQuery === '') {
     return;
   }
