@@ -19,8 +19,8 @@ refs.form.addEventListener('submit', handleSubmit);
 function handleSubmit(event) {
   event.preventDefault();
   const searchQuery = refs.input.value.trim().toLowerCase();
-  // localStorage.setItem('iputValue', refs.input.value.trim().toLowerCase());
-  // console.log(localStorage.getItem('inputValue'));
+  localStorage.setItem('inputValue', searchQuery);
+  console.log(localStorage.getItem('inputValue'));
   if (searchQuery === '') {
     return;
   }
@@ -33,6 +33,7 @@ function handleSubmit(event) {
 
 async function pushImages(query) {
   try {
+    // currentPage = 1;
     const resp = await getGallery(query, currentPage);
     const images = resp.data.hits;
     if (images.length === 0) {
@@ -119,8 +120,9 @@ function getMarkup(images) {
 
 function loadMoreImages() {
   currentPage += 1;
+  const searchQuery = localStorage.getItem('inputValue');
 
-  const searchQuery = refs.input.value.trim();
+  // const searchQuery = refs.input.value.trim();
   pushImages(searchQuery);
   if (currentPage === totalPages) {
     return refs.loadMoreBtn.classList.add('btn-hidden');
